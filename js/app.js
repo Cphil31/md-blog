@@ -2,8 +2,9 @@
 "use strict";
 var app = {
 	
-		init:function(){
-            // let's go
+  init:function(){
+            // this.getmarkdown();
+            // this.getJson();
             this.listeners();
         },
         listeners:function(){
@@ -33,7 +34,7 @@ var app = {
 
         }, 
 
-       getJson:function(){
+        getJson:function(){
             $.ajax("http://192.168.1.40:1337/menu.json")
             .done(this.jsonDone)
             .fail(this.jsonFail)
@@ -44,23 +45,18 @@ var app = {
         jsonDone:function(){
           $.get("http://192.168.1.40:1337/menu.json",function(foo){
             for (var i = 0; i < foo.menu.length; i++) {
-                console.log(foo.menu[i].title);
-            $("#md").append(<a href=> foo.menu[i].title   </a>);
-           
-
-
-
+                console.log(foo.menu[i]);
+                $("#md").html("<li>"+"<a href=>"+foo.menu[i].title+"</li>");
             }
 
+        })              
+      },
 
-          })              
-        },
+      jsonFail:function() {
+        alert("fail !");
+    },
 
-        jsonFail:function() {
-            alert("fail !");
-        },
-
-        jsonAlways : function() {
+    jsonAlways : function() {
             // alert("always !");
         },   
     };
